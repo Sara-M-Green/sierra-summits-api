@@ -1,5 +1,5 @@
 {
-  "name": "Sierra Summits",
+  "name": "Sierra-Summits",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.7",
     "supertest": "^6.0.1"
   }
 }

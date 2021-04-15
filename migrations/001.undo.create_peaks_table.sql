@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS peaks_table

@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
+const PeaksService = require('./peaks/peaks-service')
 
 
 const app = express()
@@ -17,35 +18,43 @@ app.use(helmet())
 app.use(cors())
 
 
-const data = require('../peakData')
 
-
-app.get('/api/peaks', (req, res) => {
-    const { search = "", sort } = req.query
-
-    if (sort) {
-        if(!['peakName', 'gain', 'mileage' ].includes(sort)) {
-            return res
-                .status(400)
-                .send('Must sort by Peak Name, Elevation Gain or Mileage')
-        }
-    }
-
-    let results = data
-        .filter(peak => 
-            peak.peakName
-            .toLowerCase()
-            .includes(search.toLowerCase()))
-
-    if (sort) {
-        results
-            .sort((a, b) => {
-                return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
-            })
-    }
-
-    res.json(results)
+app.get('/api/peaks', (req, res, next) => {
+    PeaksService.getAllPeaks(req.app.get('db'))
+        .then(peaks => {
+            res.json(peaks)
+        })
+        .catch(next)
+    
 })
+
+
+// app.get('/api/peaks', (req, res) => {
+//     const { search = "", sort } = req.query
+
+//     if (sort) {
+//         if(!['peakName', 'gain', 'mileage' ].includes(sort)) {
+//             return res
+//                 .status(400)
+//                 .send('Must sort by Peak Name, Elevation Gain or Mileage')
+//         }
+//     }
+
+//     let results = data
+//         .filter(peak => 
+//             peak.peakName
+//             .toLowerCase()
+//             .includes(search.toLowerCase()))
+
+//     if (sort) {
+//         results
+//             .sort((a, b) => {
+//                 return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
+//             })
+//     }
+
+//     res.json(results)
+// })
 
 app.use(function errorHandler(error, req, res, next) {
     let response

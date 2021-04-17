@@ -1,5 +1,5 @@
 CREATE TABLE peaks_table (
-    id INTEGER,
+    id INTEGER PRIMARY KEY,
     peakName TEXT NOT NULL,
     summit TEXT,
     start TEXT,
@@ -16,3 +16,4 @@ CREATE TABLE peaks_table (
     website TEXT,
     image TEXT
 );
+

@@ -18,9 +18,9 @@ describe('Peaks Endpoints', function() {
     
     after('disconnect from db', () => db.destroy())
     
-    before('clean the table', () => db.raw('TRUNCATE peaks_table'))
+    before('clean the table', () => db.raw('TRUNCATE peaks_table RESTART IDENTITY CASCADE'))
     
-    afterEach('cleanup',() => db.raw('TRUNCATE peaks_table'))
+    afterEach('cleanup',() => db.raw('TRUNCATE peaks_table RESTART IDENTITY CASCADE'))
 
     describe(`GET /api/peaks`, () => {
         context('Given there are peaks in database', () => {

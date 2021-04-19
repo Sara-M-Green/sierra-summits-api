@@ -1,5 +1,5 @@
 CREATE TABLE peaks_table (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY NOT NULL,
     peakName TEXT NOT NULL,
     summit TEXT,
     start TEXT,

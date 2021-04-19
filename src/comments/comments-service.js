@@ -13,12 +13,19 @@ const CommentsService = {
             })
     },
 
-    getById(knex, id) {
+    getByCommentId(knex, id) {
         return knex
             .from('comments')
             .select('*')
             .where('id', id)
             .first()
+    },
+
+    getByPeakId(knex, id) {
+        return knex
+            .from('comments')
+            .select('*')
+            .where('peak_id', id)
     },
 
     deleteComment(knex, id) {

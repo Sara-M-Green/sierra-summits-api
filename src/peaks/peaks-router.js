@@ -1,4 +1,3 @@
-const path =  require('path')
 const express = require('express')
 const PeaksService = require('./peaks-service')
 
@@ -6,7 +5,7 @@ const peaksRouter = express.Router()
 
 peaksRouter
     .route('/')
-    .get((req, res, next) => {
+    .get((req, res, next) => {  
         const knexInstance = req.app.get('db')
         PeaksService.getAllPeaks(knexInstance)
             .then(peaks => {

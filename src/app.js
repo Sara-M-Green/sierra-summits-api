@@ -19,14 +19,14 @@ app.use(helmet())
 app.use(cors())
 
 app.use('/api/peaks', peaksRouter)
-app.use('/api/peaks/:id/comments', commentsRouter)
+app.use('/api/comments', commentsRouter)
 
 
 // app.get('/api/peaks', (req, res) => {
 //     const { search = "", sort } = req.query
 
 //     if (sort) {
-//         if(!['peakName', 'gain', 'mileage' ].includes(sort)) {
+//         if(!['peakname', 'gain', 'mileage' ].includes(sort)) {
 //             return res
 //                 .status(400)
 //                 .send('Must sort by Peak Name, Elevation Gain or Mileage')

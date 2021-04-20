@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const peaksRouter = require('./peaks/peaks-router')
 const commentsRouter = require('./comments/comments-router')
-
+const data = require('../data')
 
 const app = express()
 
@@ -22,32 +22,32 @@ app.use('/api/peaks', peaksRouter)
 app.use('/api/comments', commentsRouter)
 
 
-// app.get('/api/peaks', (req, res) => {
-//     const { search = "", sort } = req.query
+app.get('/api/peaks', (req, res) => {
+    const { search = "", sort } = req.query
 
-//     if (sort) {
-//         if(!['peakname', 'gain', 'mileage' ].includes(sort)) {
-//             return res
-//                 .status(400)
-//                 .send('Must sort by Peak Name, Elevation Gain or Mileage')
-//         }
-//     }
+    if (sort) {
+        if(!['peakname', 'gain', 'mileage' ].includes(sort)) {
+            return res
+                .status(400)
+                .send('Must sort by Peak Name, Elevation Gain or Mileage')
+        }
+    }
 
-//     let results = data
-//         .filter(peak => 
-//             peak.peakName
-//             .toLowerCase()
-//             .includes(search.toLowerCase()))
+    let results = data
+        .filter(peak => 
+            peak['Peak Name']
+            .toLowerCase()
+            .includes(search.toLowerCase()))
 
-//     if (sort) {
-//         results
-//             .sort((a, b) => {
-//                 return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
-//             })
-//     }
+    if (sort) {
+        results
+            .sort((a, b) => {
+                return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
+            })
+    }
 
-//     res.json(results)
-// })
+    res.json(results)
+})
 
 app.use(function errorHandler(error, req, res, next) {
     let response

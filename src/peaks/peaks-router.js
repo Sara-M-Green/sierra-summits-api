@@ -7,7 +7,6 @@ peaksRouter
     .route('/')
     .get((req, res, next) => {  
         const { sort, search="" } = req.query
-        console.log(`-----------------------------------${search}`)
         const knexInstance = req.app.get('db')
         let peakResults
         PeaksService.getAllPeaks(knexInstance)
@@ -22,7 +21,6 @@ peaksRouter
             }
 
             if (search) {
-                console.log(peaks)
                 peakResults = peaks
                 .filter(peak => 
                     peak.peakname
@@ -34,9 +32,15 @@ peaksRouter
 
             if (sort) {
                 peakResults = peaks
-                .sort((a, b) => {
-                    return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
-                })
+                if (sort !== 'gain' || sort !== 'mileage') {
+                    peakResults.sort((a, b) => {
+                        return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0
+                    })    
+                } else {
+                    peakResults.sort((a, b) => {
+                        return parseInt(a[sort]) > parseInt(b[sort]) ? 1 : parseInt(a[sort]) < parseInt(b[sort]) ? -1 : 0
+                    })    
+                }               
             }
 
                 res.json(peakResults)

@@ -1,10 +1,10 @@
 CREATE TABLE peaks_table (
     id INTEGER PRIMARY KEY NOT NULL,
-    peakName TEXT NOT NULL,
+    peakname TEXT NOT NULL,
     summit TEXT,
     start TEXT,
     mileage TEXT NOT NULL,
-    quadMap TEXT,
+    quadmap TEXT,
     class TEXT NOT NULL,
     gain TEXT NOT NULL,
     loss TEXT,

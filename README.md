@@ -1,26 +1,24 @@
-# Express Boilerplate!
+# Sierra Summits API
 
-This is a boilerplate project used for starting new projects!
+## Live Link
 
-## Set up
+https://sierra-summits.vercel.app
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+### Documentation
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+Sierra Summits API solicits two endpoints: 
+/peaks & /comments
 
-## Scripts
+The SPS Peak Finder page makes a GET all peaks request, then users can sort and filter the data via the client side of the application.
 
-Start the application `npm start`
+Each peak has a detailed page where a GET peak by ID request is made to access further details and information on each specific peak.
 
-Start nodemon for the application `npm run dev`
+Each peak also holds a summit register where comments are applied to each specific peak. 
 
-Run the tests `npm test`
+A GET comments by peak ID request is made at the component did mount life cycle.
 
-## Deploying
+Users can add comments by making a POST request.
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's main branch.
+### POSTGRESQL Database
+
+There are two tables in the database for this application. A peaks table which holds all of the peak data, and a comments table. The comments table refereces the peakID via a foreign key.
